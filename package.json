@@ -1,0 +1,19 @@
+{
+  "name": "address-book",
+  "version": "1.0.0",
+  "description": "Creating an Address Book in Node.js",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "addressbook",
+    "bcode"
+  ],
+  "author": "Domenico Barra <domenico@adamantic.io>",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.10.2"
+  }
+}
