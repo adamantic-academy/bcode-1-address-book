@@ -14,6 +14,7 @@
   "author": "Domenico Barra <domenico@adamantic.io>",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^4.10.2"
+    "fastify": "^4.10.2",
+    "fastify-sqlite": "^1.1.0"
   }
 }
