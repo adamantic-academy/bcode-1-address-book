@@ -22,6 +22,19 @@ export function createFastifyServer(port, addressBook) {
         return addressBook.searchByEmail( request.params['email']);
     })
 
+    fast.post('/contact', function(request, response) {
+        addressBook.add(request.body);
+        return 'OK';
+    });
+
+    fast.delete('/contact/email/:email', function(request, response) {
+        return addressBook.delete(request.params['email']);
+    });
+
+    fast.get('/contact', function(request, response) {
+        return addressBook.allContacts();
+    });
+
     fast.listen({ port }, function (err, address) {
         if (err) {
         fastify.log.error(err)
