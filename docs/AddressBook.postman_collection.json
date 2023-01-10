@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "8187fa93-32ce-4531-b20c-4f53f2f6d3df",
+		"name": "AddressBook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Contacts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/contact",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new contact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"surname\": \"Berti\",\r\n        \"name\": \"Domenico\",\r\n        \"telephone\": \"65465465463354\",\r\n        \"email\": \"berti@example.com\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/contact",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/contact/email/:email",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"contact",
+						"email",
+						":email"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": "m.barra@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
