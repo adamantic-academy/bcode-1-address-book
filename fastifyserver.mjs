@@ -33,12 +33,51 @@ export function createFastifyServer(port, addressBook) {
 
     fast.get('/surname/:srn', function(request, response) {
         const requestedSurname = request.params['srn'];
-        return addressBook.searchBySurname(requestedSurname);
+        const sql = 'SELECT * FROM contact_cards WHERE surname=$1';
+        db.all(sql, [requestedSurname], (err, rows) => {
+            response.send(rows);
+        });
     });
 
     fast.get('/email/:email', function(request, response) {
-        return addressBook.searchByEmail( request.params['email']);
-    })
+        const email = request.params['email'];
+        const sql = 'SELECT * FROM contact_cards WHERE email=$1';
+        db.get(sql, [email], (err, row) => {
+            if (err) {
+                throw err;
+            }
+            response.send(row);
+        });
+    });
+
+    fast.put('/contacts/:id', function(request, response) {
+        const id = request.params['id'];
+        const contact = {
+            surname: request.body['surname'],
+            name: request.body['name'],
+            telephone: request.body['telephone'],
+            email: request.body['email']
+        };
+        const sql = "UPDATE contact_cards SET surname=$1, name=$2, telephone=$3, email=$4 WHERE id=$5";
+        db.run(sql, [contact.surname, contact.name, contact.telephone, contact.email, id], (err, row) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+            response.send(row);
+        });
+    });
+
+    fast.delete('/contacts/:id', function(request, response) {
+        const id = request.params['id'];
+        const sql = 'DELETE FROM contact_cards WHERE id=$1';
+        db.run(sql, [id], (err) => {
+            if (err) {
+                throw err;
+            }
+            response.send("Contact with ID " + id + " removed successfully");
+        });
+    });
 
     fast.listen({ port }, function (err, address) {
         if (err) {
